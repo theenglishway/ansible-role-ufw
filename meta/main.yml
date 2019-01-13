@@ -1,0 +1,7 @@
+galaxy_info:
+  author: theenglishway
+  description: UFW setup
+  license: BSD
+
+  min_ansible_version: 2.4
+

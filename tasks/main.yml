@@ -1,0 +1,31 @@
+---
+- name: Install package
+  become: yes
+  apt:
+    name: ufw
+    state: present
+
+- name: Set logging to medium
+  become: yes
+  ufw:
+    logging: medium
+
+- name: Allow SSH connection
+  become: yes
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Enable firewall
+  become: yes
+  ufw:
+    state: enabled
+    policy: deny
+    direction: incoming
+
+- name: Allow connections {{ ufw_input_connections | join(',') }}
+  become: yes
+  ufw:
+    rule: allow
+    name: "{{ item }}"
+  loop: "{{ ufw_input_connections }}"
